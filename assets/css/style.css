@@ -1,0 +1,23 @@
+body{
+	background-color: #91c7b1;
+	position: relative;
+}
+
+.form {     
+    width: 600px;           /* Set this to your convenience */
+    height: 600px;          /* Set this to your convenience */
+    position: absolute;
+    left: 50%;
+    margin-left: -300px;     /* Half of width */
+    margin-top: 5%;
+	background-color: #f1f7ed;
+    text-align: center;
+    padding: 50px;
+    border-radius: 25px;
+}
+.form-group{
+	text-align: left;
+}
+.form img{
+	width: 80%;
+}

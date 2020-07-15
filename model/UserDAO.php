@@ -5,7 +5,7 @@ require_once 'User.php';
 
 class UserDAO{
     public static function insert(User $user){
-        $con = Conexao::connect();
+        $con = Connection::connect();
         $stmt = $con->prepare("insert into user (name, surname, email, password) values (?,?,?,?)");
         $stmt->bind_param("ssss", $name, $surname, $email, $password);
         $name = $user->getName();
@@ -19,7 +19,7 @@ class UserDAO{
     }
 
     public static function auth($email, $password){
-        $con = Conexao::connect();
+        $con = Connection::connect();
         $stmt = $con->prepare("select name, surname, id, coins from user where email = ? and password = ?");
         $stmt->bind_param("ss", $email_user, $password_user);
         $email_user = $email;

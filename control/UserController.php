@@ -4,6 +4,13 @@ require_once 'model/UserDAO.php';
 
 class UserController{
 
+    public static function signuppage(){
+        require_once 'view/user/signup.php';
+    }
+    public static function loginpage(){
+        require_once 'view/user/login.php';
+    }
+
     public static function signup(){
         $name = $_REQUEST["name"];
         $surname = $_REQUEST["surname"];
