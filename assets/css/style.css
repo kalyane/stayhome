@@ -21,3 +21,15 @@ body{
 .form img{
 	width: 80%;
 }
+.box{
+    background-color: #f1f7ed;
+    padding: 25px;
+    border-radius: 25px;
+    margin-bottom: 50px;
+}
+.division{
+    height:2px;
+    border-width:0;
+    color:gray;
+    background-color:gray;
+}

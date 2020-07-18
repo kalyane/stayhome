@@ -7,8 +7,13 @@ class UserController{
     public static function signuppage(){
         require_once 'view/user/signup.php';
     }
+
     public static function loginpage(){
         require_once 'view/user/login.php';
+    }
+
+    public static function feed(){
+        require_once 'view/user/feed.php';
     }
 
     public static function signup(){
@@ -35,7 +40,7 @@ class UserController{
         $user = UserDAO::auth($email, $password);
         if ($user != null){
             $_SESSION["user"] = $user;
-            echo "Success";
+            header("Location: /stayhome/index.php?class=user&action=feed");
         }else{
             echo "Failure";
         }

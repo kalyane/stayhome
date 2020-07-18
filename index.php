@@ -14,7 +14,12 @@
 	</head>
 	<body>
 		<?php
+        if (isset($_SESSION["user"])){
+			include "view/header.php";
 			include "view/content.php";
+        }else{
+			include "view/content.php";
+		}
 		?>
 	</body>
 </html>
