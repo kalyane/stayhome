@@ -37,4 +37,16 @@ class UserDAO{
         return null;
     }
     
+    public static function updateCoins($coins){
+        $con = Connection::connect();
+        $stmt = $con->prepare("Update user set coins=? where id = ?");
+        $stmt->bind_param("ii", $coins, $id);
+        $id = $_SESSION["user"]->getId();
+        
+        $_SESSION["user"]->setCoins($coins);
+
+        $result = $stmt->execute();
+
+        return $result;
+    }
 }

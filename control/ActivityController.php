@@ -33,5 +33,24 @@ class ActivityController{
         }
     }
 
+    public static function value($id){
+        $activity = ActivityDAO::getById($id);
+        $value = ( strtotime($activity->getTimefinish()) - strtotime($activity->getTimestart()) ) / 60;
+        return $value;
+    }
+
+    public static function update(){
+        session_start();
+        $coins = $_SESSION["user"]->getCoins();
+        foreach($_POST['check_list'] as $id => $item){
+          $coins = $coins + $item;
+          ActivityDAO::updateStatus($id);
+        }
+        UserDAO::updateCoins($coins);
+
+        echo $coins;
+    }
+
+
 }
 ?>

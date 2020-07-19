@@ -32,6 +32,10 @@ class User implements JsonSerializable{
         return $this->coins;
     }
 
+    function setCoins($coins) {
+        $this->coins = $coins;
+    }
+
     function __construct($name, $surname, $email, $password, $coins=0, $id = 0) {
         $this->id = $id;
         $this->name = $name;

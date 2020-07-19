@@ -22,9 +22,10 @@ class ActivityDAO{
 
     public static function getByIduser($id){
         $con = Connection::connect();
-        $stmt = $con->prepare("select name, timestart, timefinish, idcategory, iduser, description, status, id from activity where iduser = ?");
-        $stmt->bind_param("i",$iduser);
+        $stmt = $con->prepare("select name, timestart, timefinish, idcategory, iduser, description, status, id from activity where iduser = ? and status = ?");
+        $stmt->bind_param("ii",$iduser, $status);
         $iduser = $id;
+        $status = 0;
         
         if($stmt->execute()){ 
             $stmt->bind_result($name, $timestart, $timefinish, $idcategory, $iduser, $description, $status, $id);
@@ -39,6 +40,33 @@ class ActivityDAO{
             
         }
         return null;
+    }
+
+    public static function getById($id){
+        $con = Connection::connect();
+        $stmt = $con->prepare("select name, timestart, timefinish, idcategory, iduser, description, status, id from activity where id = ?");
+        $stmt->bind_param("i",$id);
+        
+        if($stmt->execute()){
+            $stmt->bind_result($name, $timestart, $timefinish, $idcategory, $iduser, $description, $status, $id);
+            $stmt->fetch();
+            
+            $c = new Activity($name, $timestart, $timefinish, $idcategory, $iduser, $description, $status, $id);
+        
+            return $c;
+        }
+        return null;
+    }
+
+    public static function updateStatus($id){
+        $con = Connection::connect();
+        $stmt = $con->prepare("Update activity set status=? where id = ?");
+        $stmt->bind_param("ii", $status, $id);
+        $status = 1;
+
+        $result = $stmt->execute();
+
+        return $result;
     }
     
 }

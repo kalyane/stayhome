@@ -1,5 +1,6 @@
 <?php 
 require_once 'model/CategoryDAO.php';
+require_once 'control/ActivityController.php';
  ?>
 
 <div class="container">
@@ -53,36 +54,40 @@ require_once 'model/CategoryDAO.php';
         <h4>Activities for today</h4>
         <hr class="division">
         <?php 
-        for ($x = 0; $x < count($activities); $x++) {
-          echo '<div class="activity row">';
-            echo '<div class="form-check col-sm-1">
-                  <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
-                    <label class="custom-control-label" for="defaultUnchecked"></label>
+        for ($x = 0; $x < count($activities); $x++) {?>
+          <form method="post" action="requests.php?class=activity&action=update">
+            <div class="activity row">
+              <div class="form-check col-sm-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="activity<?php echo $activities[$x]->getId()?>" name="check_list[<?php echo $activities[$x]->getId(); ?>]" value="<?php echo ActivityController::value($activities[$x]->getId()); ?>">
+                  <label class="custom-control-label" for="activity<?php echo $activities[$x]->getId()?>"></label>
                 </div>
-                  </div>';
-            echo '<div class="col-sm-2">
-                    <img class="img-fluid" src="'.CategoryDAO::getById($activities[$x]->getIdcategory())->getIcon().'">
-                  </div>';
-            echo '<div class="col-sm-9">
-                    <h5>'.$activities[$x]->getName().'</h5>';
-              echo '<span>From 04:00 to 5:00</span>
-                  </div>';
-          echo '</div> <hr>';
-        }
+              </div>
+              <div class="col-sm-2">
+                <img class="img-fluid" src="<?php echo CategoryDAO::getById($activities[$x]->getIdcategory())->getIcon()?>">
+              </div>
+              <div class="col-sm-9">
+                <h5><?php echo $activities[$x]->getName() ?></h5>
+                <span>From <?php echo date("H:i", strtotime($activities[$x]->getTimestart())); ?> to <?php echo date("H:i", strtotime($activities[$x]->getTimefinish())); ?></span>
+              </div>
+            </div>
+          <hr>
+        <?php }
          ?>
+          <button type="submit" class="btn btn-success">Mark as Complete</button>
+        </form>
       </div>
     </div>
     <div class="col-sm-3">
       <div class="award box">
-        <h4>Awards</h4>
+        <h4>Coins</h4>
         <hr class="division">
         <div class="row">
           <div class="col-sm-4">
             <img src="https://image.flaticon.com/icons/svg/845/845664.svg">
           </div>
           <div class="col-sm-8">
-            <h2>30 coins</h2>
+            <h2><?php echo $_SESSION["user"]->getCoins(); ?></h2>
           </div>
         </div>
       </div>
