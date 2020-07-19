@@ -8,10 +8,9 @@
     <i class="fa fa-bars menu" aria-hidden="true"></i>
   </div>
   <ul>
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Activities</a></li>
-    <li><a href="#">Forum</a></li>
-    <li><a href="#">Notifications</a></li>
+    <li><a href="?class=user&action=feed">Home</a></li>
+    <li><a href="?class=activity&action=list">Activities</a></li>
+    <li><a href="?class=journal&action=list">Journal</a></li>
     <li><a href="#">About</a></li>
   </ul>
 </nav>

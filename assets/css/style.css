@@ -5,7 +5,6 @@ body{
 
 .form {     
     width: 600px;           /* Set this to your convenience */
-    height: 600px;          /* Set this to your convenience */
     position: absolute;
     left: 50%;
     margin-left: -300px;     /* Half of width */

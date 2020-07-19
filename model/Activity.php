@@ -42,7 +42,7 @@ class Activity implements JsonSerializable{
         return $this->status;
     }
 
-    function __construct($name, $timestart, $timefinish, $idcategory, $iduser, $description, $status, $id = 0) {
+    function __construct($name, $timestart, $timefinish, $idcategory, $iduser, $description, $status = 0, $id = 0) {
         $this->id = $id;
         $this->name = $name;
         $this->timestart = $timestart;

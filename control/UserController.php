@@ -1,6 +1,7 @@
 <?php
 
 require_once 'model/UserDAO.php';
+require_once 'model/ActivityDAO.php';
 
 class UserController{
 
@@ -13,6 +14,8 @@ class UserController{
     }
 
     public static function feed(){
+        $id = $_SESSION['user']->getId();
+        $activities = ActivityDAO::getByIduser($id);
         require_once 'view/user/feed.php';
     }
 
