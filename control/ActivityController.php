@@ -3,6 +3,7 @@
 require_once 'model/ActivityDAO.php';
 require_once 'model/CategoryDAO.php';
 require_once 'model/UserDAO.php';
+require_once 'model/ProgressDAO.php';
 
 
 class ActivityController{
@@ -47,6 +48,10 @@ class ActivityController{
           ActivityDAO::updateStatus($id);
         }
         UserDAO::updateCoins($coins);
+        $ncompleted = ProgressDAO::getNcompleted($_SESSION['user']->getId());
+
+        $ncompleted = $ncompleted + count($_POST['check_list']);
+        ProgressDAO::updateNcompleted($ncompleted, date("Y/m/d"), $_SESSION['user']->getId());
 
         header("Location: /stayhome/index.php?class=user&action=feed");
     }

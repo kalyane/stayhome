@@ -68,4 +68,13 @@ class ActivityDAO{
         return $result;
     }
     
+    public static function statusZero($id){
+        $con = Connection::connect();
+        $stmt = $con->prepare("Update activity set status=0 where iduser=?");
+        $stmt->bind_param("i", $id);
+
+        $result = $stmt->execute();
+
+        return $result;
+    }
 }

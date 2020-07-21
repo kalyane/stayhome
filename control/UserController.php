@@ -2,6 +2,7 @@
 
 require_once 'model/UserDAO.php';
 require_once 'model/ActivityDAO.php';
+require_once 'model/ProgressDAO.php';
 
 class UserController{
 
@@ -43,6 +44,13 @@ class UserController{
         $user = UserDAO::auth($email, $password);
         if ($user != null){
             $_SESSION["user"] = $user;
+            $now = strtotime(date("Y/m/d"));
+            $database = strtotime(ProgressDAO::getLastDate($_SESSION['user']->getId()));
+            if($now != $database){
+                $progress = new Progress(0, date("Y/m/d"), $_SESSION['user']->getId());
+                ProgressDAO::insert($progress);
+                ActivityDAO::statusZero($_SESSION['user']->getId());
+            }
             header("Location: /stayhome/index.php?class=user&action=feed");
         }else{
             echo "Failure";

@@ -1,8 +1,19 @@
 <?php 
 require_once 'model/CategoryDAO.php';
 require_once 'control/ActivityController.php';
+require_once 'model/ProgressDAO.php'; 
  ?>
-
+<div>
+  <?php
+  $progress = ProgressDAO::getByIduser($_SESSION["user"]->getId()); 
+  $dates = array();
+  $numbers = array();
+  foreach ($progress as $key => $value) {
+    array_push($dates, date("M j", strtotime($value->getDate())));
+    array_push($numbers, $value->getNcompleted());
+  }
+  ?>
+</div>
 <div class="container">
   <div class="row">
     <div class="col-sm-3">
@@ -96,6 +107,7 @@ require_once 'control/ActivityController.php';
       <div class="notifications box">
         <h4>Progress</h4>
         <hr class="division">
+        <canvas id="myChart" width="400" height="400"></canvas>
       </div>
     </div>
   </div>  
@@ -115,4 +127,30 @@ require_once 'control/ActivityController.php';
       document.getElementById("text").innerHTML = quote.text;
       document.getElementById("author").innerHTML = quote.author;
     });
+</script>
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: <?php echo json_encode($dates); ?>,
+        datasets: [{
+            label: '# of activities completed',
+            data: <?php echo json_encode($numbers); ?>,
+            backgroundColor: 'rgba(149, 9, 82, 0.2)',
+            borderColor: 'rgba(149, 9, 82, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
 </script>
