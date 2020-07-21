@@ -32,3 +32,6 @@ body{
     color:gray;
     background-color:gray;
 }
+.black{
+    filter: grayscale(100%)
+}

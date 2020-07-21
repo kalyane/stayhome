@@ -30,7 +30,7 @@ class UserController{
         $user = new user($name, $surname, $email, $password, $coins, $id);
 
         if(UserDAO::insert($user)){
-            echo "Success";
+            header("Location: /stayhome/index.php?class=user&action=loginpage");
         }else{
             echo "Failure";
         }

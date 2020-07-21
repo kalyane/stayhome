@@ -53,15 +53,17 @@ require_once 'control/ActivityController.php';
         <button style="float: right;" class="btn btn-primary" id="add">+ Add activities</button>
         <h4>Activities for today</h4>
         <hr class="division">
+        <form method="post" action="requests.php?class=activity&action=update">
         <?php 
         for ($x = 0; $x < count($activities); $x++) {?>
-          <form method="post" action="requests.php?class=activity&action=update">
-            <div class="activity row">
+            <div class="activity row <?php if ($activities[$x]->getStatus() == 1) echo 'black'; ?>">
               <div class="form-check col-sm-1">
+                <?php if ($activities[$x]->getStatus() == 0) echo '
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="activity<?php echo $activities[$x]->getId()?>" name="check_list[<?php echo $activities[$x]->getId(); ?>]" value="<?php echo ActivityController::value($activities[$x]->getId()); ?>">
-                  <label class="custom-control-label" for="activity<?php echo $activities[$x]->getId()?>"></label>
-                </div>
+                  <input type="checkbox" class="custom-control-input" id="activity'.$activities[$x]->getId().'" name="check_list['.$activities[$x]->getId().']" value="'.ActivityController::value($activities[$x]->getId()).'">
+                  <label class="custom-control-label" for="activity'.$activities[$x]->getId().'"></label>
+                </div>';
+                ?>
               </div>
               <div class="col-sm-2">
                 <img class="img-fluid" src="<?php echo CategoryDAO::getById($activities[$x]->getIdcategory())->getIcon()?>">

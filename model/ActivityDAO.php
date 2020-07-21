@@ -22,10 +22,9 @@ class ActivityDAO{
 
     public static function getByIduser($id){
         $con = Connection::connect();
-        $stmt = $con->prepare("select name, timestart, timefinish, idcategory, iduser, description, status, id from activity where iduser = ? and status = ?");
-        $stmt->bind_param("ii",$iduser, $status);
+        $stmt = $con->prepare("select name, timestart, timefinish, idcategory, iduser, description, status, id from activity where iduser = ? ORDER BY status ASC");
+        $stmt->bind_param("i",$iduser);
         $iduser = $id;
-        $status = 0;
         
         if($stmt->execute()){ 
             $stmt->bind_result($name, $timestart, $timefinish, $idcategory, $iduser, $description, $status, $id);

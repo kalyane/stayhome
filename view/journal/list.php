@@ -5,8 +5,10 @@
 		<hr class="division">
 		<?php 
 		for ($x = 0; $x < count($journal); $x++) {
+			$date = strtotime($journal[$x]->getDate());
+			$new_date = date('F j, Y', $date);
 			echo '<div class="journal">
-					<h5>'.$journal[$x]->getDate().'</h5>
+					<h5>'.$new_date.'</h5>
 					<p>'.$journal[$x]->getDescription().'</p>
 				</div>
 				<hr>';

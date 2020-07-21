@@ -48,7 +48,7 @@ class ActivityController{
         }
         UserDAO::updateCoins($coins);
 
-        echo $coins;
+        header("Location: /stayhome/index.php?class=user&action=feed");
     }
 
 
