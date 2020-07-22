@@ -35,3 +35,15 @@ body{
 .black{
     filter: grayscale(100%)
 }
+.act-box{
+    text-align: center;
+    border: 2px solid black;
+    padding: 25px;
+    border-radius: 50px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.act-box img{
+    max-width: 80%;
+    margin-bottom: 20px;
+}

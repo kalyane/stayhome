@@ -2,18 +2,14 @@
 require_once 'model/CategoryDAO.php';
 require_once 'control/ActivityController.php';
 require_once 'model/ProgressDAO.php'; 
- ?>
-<div>
-  <?php
-  $progress = ProgressDAO::getByIduser($_SESSION["user"]->getId()); 
-  $dates = array();
-  $numbers = array();
-  foreach ($progress as $key => $value) {
-    array_push($dates, date("M j", strtotime($value->getDate())));
-    array_push($numbers, $value->getNcompleted());
-  }
-  ?>
-</div>
+$progress = ProgressDAO::getByIduser($_SESSION["user"]->getId()); 
+$dates = array();
+$numbers = array();
+foreach ($progress as $key => $value) {
+  array_push($dates, date("M j", strtotime($value->getDate())));
+  array_push($numbers, $value->getNcompleted());
+}
+?>
 <div class="container">
   <div class="row">
     <div class="col-sm-3">

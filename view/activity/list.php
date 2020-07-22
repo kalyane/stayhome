@@ -16,6 +16,20 @@ $categories = CategoryDAO::getAll();
 	        		<h2><?php echo $value->getName()?></h2>
 	        	</div>
         	</div>
+        	<div class="row">
+        		<?php 
+    			require_once  ("model/SuggestionDAO.php");
+    			$suggestions = SuggestionDAO::getByIdcategory($value->getId());
+    			foreach ($suggestions as $key2 => $value2) { ?>
+    				<div class="col-sm-3">
+    					<div class="act-box">
+		        			<img src="<?php echo $value2->getIcon() ?>">
+		        			<h4><?php echo $value2->getName() ?></h4>
+		        		</div>
+    				</div>
+    			<?php }
+    			?>
+        	</div>
         	<hr>
         <?php endforeach ?>
 	</div>
